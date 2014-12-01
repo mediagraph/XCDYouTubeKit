@@ -158,6 +158,10 @@ NSString *const XCDYouTubeVideoUserInfoKey = @"Video";
 	[[NSNotificationCenter defaultCenter] postNotificationName:XCDYouTubeVideoPlayerViewControllerDidReceiveVideoNotification object:self userInfo:@{ XCDYouTubeVideoUserInfoKey: video }];
 	
 	self.moviePlayer.contentURL = streamURL;
+
+	// I was finding that, in our playback context, the video was not restarting without
+	// this command. Adding this in our fork. --JKA
+	[self.moviePlayer play];
 }
 
 - (void) stopWithError:(NSError *)error
